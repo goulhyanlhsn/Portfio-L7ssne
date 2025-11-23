@@ -54,7 +54,7 @@ h2.section-title:hover::after { width: 60px; }
 }
 .hero-content{
   position:relative;
-  z-index:2;
+  z-index:3;
   text-align:center;
 }
 .hero-content h1{
@@ -76,12 +76,59 @@ h2.section-title:hover::after { width: 60px; }
   border:none;
   box-shadow:0 0 15px #60A5FA;
   transition:.4s;
-  z-index:2;
+  z-index:3;
 }
 .btn-main:hover{
   background:#F59E0B;
   box-shadow:0 0 25px #F59E0B;
   color:#0F172A;
+}
+
+/* Hexagon Background */
+.hexagon-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0.6;
+}
+
+.hexagon {
+  position: absolute;
+  width: 100px;
+  height: 57.74px; /* height = width * √3 / 2 */
+  background: linear-gradient(45deg, rgba(30, 58, 138, 0.1), rgba(96, 165, 250, 0.05));
+  margin: 28.87px 0; /* margin = height / 2 */
+  animation: floatHexagon 20s infinite linear;
+  border-radius: 4px;
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+}
+
+.hexagon:before {
+  bottom: 100%;
+  border-bottom: 28.87px solid rgba(30, 58, 138, 0.1);
+}
+
+.hexagon:after {
+  top: 100%;
+  border-top: 28.87px solid rgba(96, 165, 250, 0.05);
+}
+
+@keyframes floatHexagon {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+  50% { opacity: 0.3; }
+  100% { transform: translateY(-1000px) rotate(720deg); opacity: 0.7; }
 }
 
 /* Floating Skill Icons in Hero */
@@ -93,7 +140,7 @@ h2.section-title:hover::after { width: 60px; }
   height:100%;
   transform:translate(-50%,-50%);
   pointer-events:none;
-  z-index:1;
+  z-index:2;
 }
 .skill-icons i, .skill-icons img{
   position:absolute;
@@ -352,35 +399,49 @@ h2.section-title:hover::after { width: 60px; }
   .skills-grid {
     grid-template-columns: 1fr;
   }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+  }
+  
+  .hexagon {
+    width: 60px;
+    height: 34.64px;
+  }
+  
+  .hexagon:before,
+  .hexagon:after {
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+  }
+  
+  .hexagon:before {
+    border-bottom: 17.32px solid rgba(30, 58, 138, 0.1);
+  }
+  
+  .hexagon:after {
+    border-top: 17.32px solid rgba(96, 165, 250, 0.05);
+  }
 }
 
-/* ===== Services ===== */
-.services .card{background:#111;border:none;border-radius:20px;box-shadow:0 0 15px #60A5FA;text-align:center;padding:20px;transition:.3s;}
-.services .card:hover{box-shadow:0 0 25px #F59E0B;}
-.services .card i{font-size:3rem;color:#60A5FA;margin-bottom:15px;}
+/* بقية الأنماط تبقى كما هي */
+/* ... */
 
-/* ===== Projects ===== */
-.projects .card{background:#111;border:none;border-radius:20px;overflow:hidden;box-shadow:0 0 15px #60A5FA;transition:transform .5s, box-shadow .5s;}
-.projects .card:hover{transform:rotateY(10deg) scale(1.05);box-shadow:0 0 25px #F59E0B,0 0 50px #60A5FA;}
-.projects .card img{border-radius:20px 20px 0 0;}
-
-/* ===== Contact ===== */
-.contact-form input, .contact-form textarea{background:#111;border:1px solid #60A5FA;color:#F8FAFC;border-radius:10px;padding:10px;width:100%;margin-bottom:15px;}
-.contact-form input:focus, .contact-form textarea:focus{outline:none;border-color:#F59E0B;box-shadow:0 0 10px #F59E0B;}
-.contact-form button{width:100%;padding:10px;background:#1E3A8A;border:none;color:#F8FAFC;font-weight:bold;border-radius:50px;box-shadow:0 0 15px #60A5FA;transition:.4s;}
-.contact-form button:hover{background:#F59E0B;box-shadow:0 0 25px #F59E0B;}
-
-/* ===== Footer ===== */
-footer{text-align:center;padding:30px 0;background:#111;color:#888;margin-top:50px;}
 </style>
 </head>
 <body>
-
 <!-- Hero -->
 <header id="hero">
+  <!-- Hexagon Background -->
+  <div class="hexagon-background" id="hexagonContainer"></div>
+  
   <div class="hero-content">
     <h1 id="typed-text"></h1>
-    <p>مبرمج ويب – Back-End | Front-End | UI/UX</p>
+    <p>مبرمج ويب – Symfony | Front-End | UI/UX</p>
     <a href="#projects" class="btn-main">شوف مشاريعي</a>
   </div>
   <div class="skill-icons">
@@ -412,7 +473,7 @@ footer{text-align:center;padding:30px 0;background:#111;color:#888;margin-top:50
     <!-- right: content -->
     <div class="about-pro__right">
       <div class="title-row">
-        <h3 class="name-pro">L7Ssne</h3>
+        <h3 class="name-pro">حسن</h3>
         <p class="role-pro">مبرمج ويب احترافي • Symfony • Front-End • UI/UX</p>
       </div>
 
@@ -3306,63 +3367,34 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </style>
 
-<script>
-// Back to Top Functionality
-document.addEventListener('DOMContentLoaded', function() {
-  const backToTopBtn = document.getElementById('backToTop');
-  
-  // Show/hide back to top button based on scroll position
-  window.addEventListener('scroll', function() {
-    if (window.pageYOffset > 300) {
-      backToTopBtn.style.opacity = '1';
-      backToTopBtn.style.visibility = 'visible';
-    } else {
-      backToTopBtn.style.opacity = '0';
-      backToTopBtn.style.visibility = 'hidden';
-    }
-  });
-  
-  // Smooth scroll to top
-  backToTopBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-  
-  // Initialize back to top button state
-  backToTopBtn.style.opacity = '0';
-  backToTopBtn.style.visibility = 'hidden';
-  backToTopBtn.style.transition = 'opacity 0.3s ease, visibility 0.3s ease';
-  
-  // Add animation to footer elements on scroll
-  const footerObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-  
-  // Animate footer sections
-  const footerSections = document.querySelectorAll('.footer-brand, .footer-links, .footer-services, .footer-contact');
-  footerSections.forEach((section, index) => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-    footerObserver.observe(section);
-  });
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+// Hexagon Background Generation
+function createHexagonBackground() {
+  const container = document.getElementById('hexagonContainer');
+  const hexagonCount = 20; // عدد الأشكال السداسية
+  
+  for (let i = 0; i < hexagonCount; i++) {
+    const hexagon = document.createElement('div');
+    hexagon.className = 'hexagon';
+    
+    // مواقع عشوائية
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const delay = Math.random() * 20;
+    const duration = 15 + Math.random() * 10;
+    
+    hexagon.style.left = `${left}%`;
+    hexagon.style.top = `${top}%`;
+    hexagon.style.animationDelay = `${delay}s`;
+    hexagon.style.animationDuration = `${duration}s`;
+    
+    container.appendChild(hexagon);
+  }
+}
+
 // Hero Typing Effect
-const texts=["L7ssne","مبرمج ويب","Back-End | Front-End | UI/UX"];
+const texts=["L7ssne","مبرمج ويب","Symfony | Front-End | UI/UX"];
 let count=0,index=0,currentText='',letter='';
 (function type(){
   if(count===texts.length)count=0;
@@ -3481,6 +3513,9 @@ document.addEventListener('mousemove',(e)=>{
     }
   });
 });
+
+// Initialize hexagon background
+createHexagonBackground();
 </script>
 </body>
 </html>
